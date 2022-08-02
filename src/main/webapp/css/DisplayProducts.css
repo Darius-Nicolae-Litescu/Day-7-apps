@@ -1,0 +1,42 @@
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  float: left;
+  width:90%;
+  margin: 50px 50px 50px 50px
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-image{
+	width:70%;
+	float:left;
+	margin: 50px 50px 50px 50px;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.button {
+    top:50%;
+  	margin: auto;
+  	width: 100%;;
+    background-color:#0a0a23;
+    color: #fff;
+}
+
+.button-filter {
+    top:50%;
+  	margin: auto;
+  	width: 25%;;
+    background-color:#0a0a23;
+    color: #fff;
+}
+
+body { 
+	font-size: 150%; 
+	font-family: 'Roboto', sans-serif;
+}
