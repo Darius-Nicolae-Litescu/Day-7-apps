@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Product implements Serializable {
-    private Long id;
+	private static final long serialVersionUID = 1L;
+	
+	private Long id;
     private String name;
     private String productCode;
     private String pictureHref;

@@ -26,7 +26,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 " PRIMARY KEY (id)" +
                 ")";
 
-        shoppingDatabaseStatement.execute(sql, null);
+        shoppingDatabaseStatement.execute(sql, new String());
     }
 
 
@@ -91,12 +91,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public void dropTable() {
         String sql = "DROP TABLE IF EXISTS Product";
-        shoppingDatabaseStatement.execute(sql, null);
+        shoppingDatabaseStatement.execute(sql, new String());
     }
 
     @Override
     public void dropDatabase() {
         String sql = "DROP DATABASE IF EXISTS Product";
-        shoppingDatabaseStatement.execute(sql, null);
+        shoppingDatabaseStatement.execute(sql, new String());
     }
 }

@@ -18,6 +18,7 @@ public interface ProductRepository {
     List<Product> getAll();
 
     List<Product> filterByProductName(String name);
+    
     void dropTable();
 
     void dropDatabase();
