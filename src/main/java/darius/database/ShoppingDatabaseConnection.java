@@ -15,6 +15,7 @@ public class ShoppingDatabaseConnection {
             e.printStackTrace();
         }
     }
+    
     public Statement createStatement() {
         try {
             return connection.createStatement();
