@@ -73,7 +73,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public Product getById(Long id) {
         String sql = "SELECT * FROM Product WHERE id = ?";
-        return shoppingDatabaseStatement.executeGetById(sql, id);
+        return shoppingDatabaseStatement.executeGetProductById(sql, id);
     }
 
     @Override

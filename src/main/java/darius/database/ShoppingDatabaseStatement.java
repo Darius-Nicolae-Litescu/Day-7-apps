@@ -1,6 +1,8 @@
 package darius.database;
 
 import darius.model.Product;
+import darius.model.User;
+import darius.model.UserRole;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -44,7 +46,7 @@ public class ShoppingDatabaseStatement {
                 } else {
                     {
                         if (param instanceof String) {
-                            sql = sql.replaceFirst("\\?", "'" + param + "'");
+                            sql = sql.replaceFirst("\\?", "\"" + param + "\"");
                         } else if (param instanceof Long || param instanceof Integer || param instanceof BigDecimal) {
                             sql = sql.replaceFirst("\\?", param.toString());
                         }
@@ -55,10 +57,30 @@ public class ShoppingDatabaseStatement {
         return sql;
     }
 
-    public Product executeGetById(String sql, Long id) {
+
+    public User executeGetUserByUsername(String sql, String username){
+        User user = null;
+        try {
+            sql = replaceParametersInSqlString(sql, username);
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                user = new User(resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        UserRole.valueOf(resultSet.getString("role")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return user;
+    }
+
+    public Product executeGetProductById(String sql, Long id) {
         Product product = null;
         try {
             sql = replaceParametersInSqlString(sql, String.valueOf(id));
+            statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
                 product = new Product(resultSet.getLong("id"),
@@ -107,7 +129,7 @@ public class ShoppingDatabaseStatement {
         close();
         return null;
     }
-
+    
     public void close() {
         try {
             if (statement != null) {

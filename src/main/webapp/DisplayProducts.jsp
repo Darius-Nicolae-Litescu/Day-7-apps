@@ -22,6 +22,12 @@
 	</div>
 
 	<%
+	String username = (String) request.getAttribute("username");
+	%>
+	<h4>
+		<b class="username-display">Welcome: <%=username%></b>
+	</h4>
+	<%
 	List<Product> productList = (List<Product>) request.getAttribute("products");
 	for (Product product : productList) {
 	%>
