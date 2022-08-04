@@ -1,0 +1,85 @@
+.button
+{
+	background-color: #0080d9;
+	border: none;
+	color: white;
+	letter-spacing: .8px;
+	width: 100%;
+}
+
+.card
+{
+	background: #0080d9;
+	border-radius: 2px;
+	box-shadow: 5px 5px 3px rgb(151 142 142 / 65%);
+	height: 35vw;
+	margin: 6rem auto 8.1rem auto;
+	width: 30%;
+}
+
+.table-style
+{
+	width: 100%;
+}
+
+.title
+{
+	background: #0080d9;
+	box-shadow: 1px 1px 10px 1px #0d0606;
+	color: #FFFFFF;
+	font-size: 20px;
+	height: 25px;
+	padding: 11px 9px 9px 31px;
+	text-shadow: 2px 2px 3px #0d0606;
+}
+
+body
+{
+	font-family: 'Roboto', sans-serif;
+	font-size: 150%;
+}
+
+div.row
+{
+	display: flex;
+	width: 100%;
+}
+
+div.row input
+{
+	margin-left: 5px;
+}
+
+div.row input:first-child
+{
+	margin-left: 0;
+}
+
+input[type="text"]
+{
+	background: #E8E8E8;
+	border: 0;
+	border-radius: 10px;
+	box-sizing: border-box;
+	margin: 10px 10px 10px 10px;
+	margin-bottom: 5px;
+	padding: 6px 12px;
+	width: 95%;
+}
+
+input[type=submit]
+{
+	background: #1ba4dd;
+	border: none;
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 10px;
+	font-weight: 700;
+	padding: 8px 0;
+	width: 100%;
+}
+
+input[type=submit]:hover
+{
+	background: #00bfff;
+}
