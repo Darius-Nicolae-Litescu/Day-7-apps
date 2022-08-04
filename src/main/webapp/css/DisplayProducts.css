@@ -36,6 +36,10 @@
     color: #fff;
 }
 
+.username-display{
+	float:left;
+}
+
 body { 
 	font-size: 150%; 
 	font-family: 'Roboto', sans-serif;

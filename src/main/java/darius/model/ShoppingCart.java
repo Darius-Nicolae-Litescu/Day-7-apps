@@ -1,42 +1,33 @@
 package darius.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ShoppingCart {
 
-    private Long id;
-    private List<Integer> productList;
+    private List<Product> productList;
 
     public ShoppingCart() {
+        this.productList = new ArrayList<>();
     }
 
-    public ShoppingCart(Long id, List<Integer> productList) {
-        this.id = id;
+    public ShoppingCart(List<Product> productList) {
         this.productList = productList;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Integer> getProductList() {
+    public List<Product> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<Integer> productList) {
+    public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
 
     @Override
     public String toString() {
         return "ShoppingCart{" +
-                "id=" + id +
-                ", productList=" + productList +
+                "productList=" + productList +
                 '}';
     }
 
@@ -45,11 +36,11 @@ public class ShoppingCart {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ShoppingCart that = (ShoppingCart) o;
-        return Objects.equals(id, that.id) && Objects.equals(productList, that.productList);
+        return Objects.equals(productList, that.productList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productList);
+        return Objects.hash(productList);
     }
 }

@@ -14,16 +14,19 @@ import darius.InitializeServices;
 import darius.dto.UserLoginDTO;
 import darius.model.Product;
 import darius.service.UserService;
+import darius.utils.ProductCartUtils;
 import darius.validator.UserValidator;
 
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserService userService;
+	private ProductCartUtils productCartUtils;
 
     public LoginServlet() {
         super();
         this.userService = InitializeServices.createUserServiceInstance();
+        this.productCartUtils = new ProductCartUtils();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 		} else if(userService.validateUser(userLoginDTO)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-			//session.setAttribute("cart", new ArrayList<Product>());
+			productCartUtils.initializeCartIfEmpty(session);
 			request.getRequestDispatcher("DisplayProducts").forward(request, response);
 		} else {
 			request.setAttribute("errorMessage", "User could not be found/ Invalid username or password");

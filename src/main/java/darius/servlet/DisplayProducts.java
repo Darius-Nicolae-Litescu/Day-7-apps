@@ -19,15 +19,17 @@ import darius.utils.ProductCartUtils;
 @WebServlet("/DisplayProducts")
 public class DisplayProducts extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	private ProductCartUtils productCartUtils;
 	private ProductService productService;
 	private Logger logger;
 
 	public DisplayProducts() {
 		super();
-		productService = InitializeServices.createProductServiceInstance();
-		logger = InitializeServices.createConsoleLoggerInstance();
+		this.productService = InitializeServices.createProductServiceInstance();
+		this.logger = InitializeServices.createConsoleLoggerInstance();
 		InitializeDatabaseData.initializeProductData(productService);
+        this.productCartUtils = new ProductCartUtils();
 		logger.logMessage(this.getClass().toString() + " constructor invoked", LoggingType.INFO);
 	}
 
@@ -54,14 +56,14 @@ public class DisplayProducts extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 		HttpSession session = request.getSession(false);
-		String productId = (String) session.getAttribute("productId");
-		Long productIdLong = Long.parseLong(productId);
-		if (productIdLong != null) {
+		String productId = (String) request.getAttribute("productId");
+		if (productId != null) {
+			Long productIdLong = Long.parseLong(productId);
 			Product product = productService.getById(productIdLong);
 			if (product != null) {
 				if (session != null) {
-					ProductCartUtils.initializeCartIfEmpty(session);
-					ProductCartUtils.addProductToCartIfNotEmpty(session, product);
+					productCartUtils.initializeCartIfEmpty(session);
+					productCartUtils.addProductToCartIfNotEmpty(session, product);
 				}
 			}
 		}

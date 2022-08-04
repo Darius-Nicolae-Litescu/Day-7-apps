@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List,darius.model.Product"%>
+<%@ page import="java.util.List,darius.model.Product,darius.utils.CastUtils"%>
 <!DOCTYPE html>
 <html>
 <link href="./css/DisplayProducts.css" rel="stylesheet" type="text/css">
-
 <head>
 <meta charset="ISO-8859-1">
 <title>Display products</title>
+</head>
 <body>
 
 	<div class="container">
@@ -28,7 +28,9 @@
 		<b class="username-display">Welcome: <%=username%></b>
 	</h4>
 	<%
-	List<Product> productList = (List<Product>) request.getAttribute("products");
+	CastUtils<Product> castUtils = new CastUtils<Product>();
+	Object products = request.getAttribute("products");
+	List<Product> productList = castUtils.castObjectToList(products, Product.class);
 	for (Product product : productList) {
 	%>
 	<div class="card">
@@ -53,13 +55,12 @@
 			<p>
 				Product available quantity:
 				<%=product.getAvailableQuantity()%></p>
+			  <input type="hidden" name="product" id="product" value="<%=product%>" /> 
 			<Button class="button">Add product to cart</Button>
 		</div>
 	</div>
 	<%
 	}
 	%>
-
 </body>
-</head>
 </html>

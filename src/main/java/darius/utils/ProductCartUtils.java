@@ -9,17 +9,32 @@ import darius.model.Product;
 
 public class ProductCartUtils {
 
-	public static void initializeCartIfEmpty(HttpSession session) {
-		List<Product> currentCartItems = (List<Product>) session.getAttribute("cartItems");
+	private final CastUtils<Product> castUtils;
+
+	public ProductCartUtils() {
+		this.castUtils = new CastUtils<Product>();
+	}
+
+	public void initializeCartIfEmpty(HttpSession session) {
+		Object cartItems = session.getAttribute("cartItems");
+		List<Product> currentCartItems = castUtils.castObjectToList(cartItems, Product.class);
 		if (currentCartItems == null) {
 			session.setAttribute("cart", new ArrayList<Product>());
 		}
 	}
-	
-	public static void addProductToCartIfNotEmpty(HttpSession session, Product product) {
-		List<Product> currentCartItems = (List<Product>) session.getAttribute("cartItems");
-        currentCartItems.add(product);
-        session.setAttribute("cartItems", currentCartItems);
+
+	public void addProductToCartIfNotEmpty(HttpSession session, Product product) {
+		Object cartItems = session.getAttribute("cartItems");
+		List<Product> currentCartItems = castUtils.castObjectToList(cartItems, Product.class);
+		currentCartItems.add(product);
+		session.setAttribute("cartItems", currentCartItems);
 	}
 
+	public void removeProductToCartIfNotEmpty(HttpSession session, Long productId) {
+		Object cartItems = session.getAttribute("cartItems");
+		List<Product> currentCartItems = castUtils.castObjectToList(cartItems, Product.class);
+		currentCartItems.removeIf(item -> item.getId().equals(productId));
+		session.setAttribute("cartItems", currentCartItems);
+	}
+	
 }
